@@ -55,7 +55,7 @@ Sentry.init({
   attachStacktrace: true,
 });
 
-const API = undefined as unknown as { call: () => void };
+const API = undefined as unknown as { fetch: () => void };
 
 const product: Product = Product.centralParkApartment();
 
@@ -64,7 +64,7 @@ export default (): React.ReactElement => {
 
   const onBookButtonPress = async () => {
     try {
-      API.call();
+      API.fetch();
     } catch (e) {
       Sentry.captureException(e);
     }
