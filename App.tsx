@@ -45,6 +45,13 @@ import {Product, ProductOption} from './src/data';
 import {ImageOverlay, ImageOverlayProps} from './src/image-overlay';
 import * as eva from '@eva-design/eva';
 
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({ 
+  dsn: 'https://c97da7facb2c423e8db514eb33daf6c7@o1357066.ingest.sentry.io/4505093395578880', 
+});
+
+
 const product: Product = Product.centralParkApartment();
 
 export default (): React.ReactElement => {
