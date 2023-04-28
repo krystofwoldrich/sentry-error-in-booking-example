@@ -47,17 +47,28 @@ import * as eva from '@eva-design/eva';
 
 import * as Sentry from '@sentry/react-native';
 
-Sentry.init({ 
-  dsn: 'https://c97da7facb2c423e8db514eb33daf6c7@o1357066.ingest.sentry.io/4505093395578880', 
+Sentry.init({
+  dsn: '<retracted>',
+  attachScreenshot: true,
+  attachViewHierarchy: true,
+  environment: 'production',
+  attachStacktrace: true,
 });
 
+const API = undefined as unknown as { call: () => void };
 
 const product: Product = Product.centralParkApartment();
 
 export default (): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
-  const onBookButtonPress = (): void => {};
+  const onBookButtonPress = async () => {
+    try {
+      API.call();
+    } catch (e) {
+      Sentry.captureException(e);
+    }
+  };
 
   const renderImageItem = (
     info: ListRenderItemInfo<ImageSourcePropType>,
