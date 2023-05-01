@@ -53,6 +53,17 @@ Sentry.init({
   attachViewHierarchy: true,
   environment: 'production',
   attachStacktrace: true,
+  beforeSend: (event) => {
+    if (event.event_id) {
+      Sentry.captureUserFeedback({
+        event_id: event.event_id,
+        comments: "I'm unable to book the apartment I'm interested in on your app as the booking button is not working. Please fix the issue at the earliest.",
+        email: "david.lee@leeenterprises.com",
+        name: "David Lee",
+      });
+    }
+    return event;
+  }
 });
 
 const API = undefined as unknown as { fetch: () => void };
