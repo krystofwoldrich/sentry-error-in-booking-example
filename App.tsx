@@ -47,6 +47,8 @@ import * as eva from '@eva-design/eva';
 
 import * as Sentry from '@sentry/react-native';
 
+const API = undefined as unknown as { initBooking: () => void };
+
 Sentry.init({
   dsn: '<retracted>',
   attachScreenshot: true,
@@ -66,19 +68,14 @@ Sentry.init({
   }
 });
 
-const API = undefined as unknown as { fetch: () => void };
-
 const product: Product = Product.centralParkApartment();
 
 export default (): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
-  const onBookButtonPress = async () => {
-    try {
-      API.fetch();
-    } catch (e) {
-      Sentry.captureException(e);
-    }
+  const onBookButtonPress = () => {
+      const booking = API.initBooking();
+      return booking;
   };
 
   const renderImageItem = (
